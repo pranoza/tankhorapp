@@ -53,17 +53,6 @@ export const directusApi = {
     return data;
   },
 
-  async updateProduct(token: string, id: number, payload: Partial<Product>): Promise<void> {
-    await fetch(`${DIRECTUS_URL}/items/products/${id}`, {
-      method: 'PATCH',
-      headers: { 
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(payload),
-    });
-  },
-
   async getMyInventory(token: string, storeIds: number[]): Promise<InventoryItem[]> {
     if (storeIds.length === 0) return [];
     const query = new URLSearchParams({
@@ -77,17 +66,6 @@ export const directusApi = {
     if (!response.ok) return [];
     const { data } = await response.json();
     return data;
-  },
-
-  async updateInventory(token: string, id: number, payload: any): Promise<void> {
-    await fetch(`${DIRECTUS_URL}/items/inventory/${id}`, {
-      method: 'PATCH',
-      headers: { 
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(payload),
-    });
   },
 
   async getMyOrders(token: string, storeIds: number[]): Promise<Order[]> {
